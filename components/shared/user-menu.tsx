@@ -2,6 +2,9 @@
 
 import { LogOut, Settings, UserRound } from "lucide-react";
 import Link from "next/link";
+import { useTransition } from "react";
+import { logoutAction } from "@/app/(auth)/actions";
+import { UserAvatar } from "@/components/shared/user-avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +13,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { UserAvatar } from "@/components/shared/user-avatar";
 import type { Member } from "@/types/domain";
 
-export function UserMenu({ member }: { member: Member }) {
+export function UserMenu({ member }: { member: Pick<Member, "name" | "email" | "avatarUrl"> }) {
+  const [pending, startTransition] = useTransition();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger
@@ -22,6 +26,7 @@ export function UserMenu({ member }: { member: Member }) {
       >
         <UserAvatar member={member} className="h-8 w-8" />
       </DropdownMenuTrigger>
+
       <DropdownMenuContent align="end" className="w-56">
         <DropdownMenuLabel className="space-y-0.5">
           <span className="block text-sm font-medium">{member.name}</span>
@@ -30,6 +35,7 @@ export function UserMenu({ member }: { member: Member }) {
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
+
         <DropdownMenuItem asChild>
           <Link href="/settings/workspace" className="gap-2">
             <UserRound className="h-4 w-4" aria-hidden />
@@ -42,13 +48,20 @@ export function UserMenu({ member }: { member: Member }) {
             Plano e cobrança
           </Link>
         </DropdownMenuItem>
+
         <DropdownMenuSeparator />
-        {/* Sem sessão real até a M7; o link leva ao login público. */}
-        <DropdownMenuItem asChild>
-          <Link href="/login" className="gap-2 text-danger focus:text-danger">
-            <LogOut className="h-4 w-4" aria-hidden />
-            Sair
-          </Link>
+        <DropdownMenuItem
+          disabled={pending}
+          className="gap-2 text-danger focus:text-danger"
+          onSelect={(event) => {
+            event.preventDefault();
+            startTransition(() => {
+              void logoutAction();
+            });
+          }}
+        >
+          <LogOut className="h-4 w-4" aria-hidden />
+          {pending ? "Saindo…" : "Sair"}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

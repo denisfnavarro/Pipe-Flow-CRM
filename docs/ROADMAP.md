@@ -169,17 +169,17 @@ reais e sem login).
 **Branch:** `feat/database-schema`
 **Objetivo:** schema completo no Supabase com isolamento por workspace comprovado.
 
-- [ ] Projeto Supabase criado; Supabase CLI e ambiente local
-- [ ] Migration com as tabelas do CLAUDE.md: `workspaces`, `workspace_members`, `invites`,
+- [x] Projeto Supabase criado; Supabase CLI e ambiente local
+- [x] Migration com as tabelas do CLAUDE.md: `workspaces`, `workspace_members`, `invites`,
       `leads`, `deals`, `activities`, `subscriptions`
-- [ ] Enums `deal_stage`, `activity_type`, `member_role`, `plan`
-- [ ] Índices em `workspace_id`, `deals(stage, position)`, `leads(created_at)`
-- [ ] RLS habilitado em todas as tabelas + policies de pertencimento por `workspace_member`
-- [ ] Policies de escrita distinguindo `admin` de `member`
-- [ ] Função/trigger de criação de workspace com o criador como admin
-- [ ] Seed script com os mesmos dados do mock
-- [ ] `types/database.types.ts` gerado
-- [ ] Teste manual de isolamento: usuário A não enxerga dado do workspace de B
+- [x] Enums `deal_stage`, `activity_type`, `member_role`, `plan`
+- [x] Índices em `workspace_id`, `deals(stage, position)`, `leads(created_at)`
+- [x] RLS habilitado em todas as tabelas + policies de pertencimento por `workspace_member`
+- [x] Policies de escrita distinguindo `admin` de `member`
+- [x] Função/trigger de criação de workspace com o criador como admin
+- [x] Seed script com os mesmos dados do mock
+- [x] `types/database.types.ts` gerado
+- [x] Teste manual de isolamento: usuário A não enxerga dado do workspace de B
 
 **Verificar:** rodar as queries de dois usuários distintos e conferir o isolamento.
 **Commit final:** `feat: schema postgres, enums e policies rls por workspace`
@@ -191,13 +191,13 @@ reais e sem login).
 **Branch:** `feat/auth`
 **Objetivo:** sessão real, rotas protegidas e troca de workspace funcionando.
 
-- [ ] Clientes Supabase: `lib/supabase/client.ts`, `server.ts`, `middleware.ts`
-- [ ] Telas de signup, login, esqueci a senha e `auth/callback`
-- [ ] Middleware protegendo `(app)/` e redirecionando visitante para o login
-- [ ] Criação do primeiro workspace no onboarding (ligar a tela da M5)
-- [ ] Workspace switcher ligado a dados reais, workspace ativo em cookie
-- [ ] Menu de usuário com logout
-- [ ] Helper `requireSession()` / `requireWorkspace()` usado por toda Server Action
+- [x] Clientes Supabase: `lib/supabase/client.ts`, `server.ts`, `middleware.ts`
+- [x] Telas de signup, login, esqueci a senha e `auth/callback`
+- [x] Middleware protegendo `(app)/` e redirecionando visitante para o login
+- [x] Criação do primeiro workspace no onboarding (ligar a tela da M5)
+- [x] Workspace switcher ligado a dados reais, workspace ativo em cookie
+- [x] Menu de usuário com logout
+- [x] Helper `requireSession()` / `requireWorkspace()` usado por toda Server Action
 
 **Verificar:** signup → onboarding → dashboard; logout derruba a sessão; rota protegida
 redireciona.

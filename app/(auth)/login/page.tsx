@@ -1,11 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Suspense } from "react";
+import { LoginForm } from "@/components/auth/login-form";
+import { Skeleton } from "@/components/ui/skeleton";
 
-export const metadata = { title: "Entrar" };
+export const metadata: Metadata = { title: "Entrar" };
 
-// Formulário de fachada até a M7 ligar o Supabase Auth.
 export default function LoginPage() {
   return (
     <div className="space-y-5">
@@ -14,20 +14,10 @@ export default function LoginPage() {
         <p className="text-sm text-muted-foreground">Acesse o seu workspace.</p>
       </div>
 
-      <div className="space-y-3">
-        <div className="space-y-1.5">
-          <Label htmlFor="email">E-mail</Label>
-          <Input id="email" type="email" placeholder="voce@empresa.com.br" autoComplete="email" />
-        </div>
-        <div className="space-y-1.5">
-          <Label htmlFor="password">Senha</Label>
-          <Input id="password" type="password" autoComplete="current-password" />
-        </div>
-      </div>
-
-      <Button asChild className="w-full">
-        <Link href="/dashboard">Entrar</Link>
-      </Button>
+      {/* `useSearchParams` obriga a fronteira de Suspense no App Router. */}
+      <Suspense fallback={<Skeleton className="h-52 w-full" />}>
+        <LoginForm />
+      </Suspense>
 
       <p className="text-center text-sm text-muted-foreground">
         Ainda não tem conta?{" "}

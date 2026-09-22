@@ -4,14 +4,18 @@ import { SidebarNav } from "@/components/shared/sidebar-nav";
 import { ThemeToggle } from "@/components/shared/theme-toggle";
 import { UserMenu } from "@/components/shared/user-menu";
 import { WorkspaceSwitcher } from "@/components/shared/workspace-switcher";
-import { getCurrentMember, getWorkspace, listWorkspaces } from "@/lib/mock/workspace";
+import { listMyWorkspaces, requireWorkspace } from "@/lib/auth";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
-  const [workspaces, workspace, member] = await Promise.all([
-    listWorkspaces(),
-    getWorkspace(),
-    getCurrentMember(),
-  ]);
+  // Redireciona para /login sem sessão e para /onboarding sem workspace.
+  const { user, workspace } = await requireWorkspace();
+  const workspaces = await listMyWorkspaces();
+
+  const member = {
+    name: (user.user_metadata?.full_name as string | undefined) ?? user.email?.split("@")[0] ?? "",
+    email: user.email ?? "",
+    avatarUrl: (user.user_metadata?.avatar_url as string | undefined) ?? null,
+  };
 
   return (
     <div className="min-h-dvh bg-background">

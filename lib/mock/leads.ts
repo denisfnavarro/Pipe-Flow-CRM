@@ -17,7 +17,10 @@ export interface LeadInput {
 }
 
 function normalize(value: string): string {
-  return value.toLowerCase().normalize("NFD").replace(/\p{Diacritic}/gu, "");
+  return value
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "");
 }
 
 function decorate(lead: Lead): LeadWithRelations {
