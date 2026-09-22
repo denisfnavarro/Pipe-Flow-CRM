@@ -5,18 +5,22 @@ Roadmap de milestones do setup ao deploy. Base: [PRD.md](PRD.md) (o quê) e
 
 ## Estratégia
 
-**Interface primeiro, backend depois.** As telas são construídas contra uma camada de dados
-falsa (`lib/mock/`) que expõe exatamente a mesma assinatura das funções reais que virão
-depois. Assim o produto inteiro fica navegável e validável antes de existir um único `select`
-no Postgres — e a troca de mock para Supabase é substituição de implementação, não reescrita
-de componente.
+**Interface primeiro, backend depois.** As telas foram construídas contra uma camada de dados
+falsa (`lib/mock/`) que expunha exatamente a mesma assinatura das funções reais. Assim o
+produto inteiro ficou navegável e validável antes de existir um único `select` no Postgres —
+e a troca de mock para Supabase foi substituição de implementação, não reescrita de
+componente.
+
+> Concluído nas milestones M8 e M9: `lib/mock/` não existe mais e `lib/data/` ocupou o
+> contrato. O gerador dos dados sobreviveu em `scripts/seed-data.ts`, que é o que mantém o
+> banco idêntico ao que as telas mostravam na Fase 2.
 
 O contrato dessa camada é definido na Milestone 1 e respeitado por todas as telas:
 
 ```ts
 // lib/mock/leads.ts  →  depois  lib/data/leads.ts
-export async function listLeads(filters: LeadFilters): Promise<Lead[]>
-export async function getLead(id: string): Promise<LeadWithActivities | null>
+export async function listLeads(filters: LeadFilters): Promise<Lead[]>;
+export async function getLead(id: string): Promise<LeadWithActivities | null>;
 ```
 
 Todo componente de tela é `async` Server Component que chama essas funções. Na fase de

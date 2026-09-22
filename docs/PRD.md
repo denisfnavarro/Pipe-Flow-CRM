@@ -63,14 +63,14 @@ interações e integração de pagamento para monetização.
 
 Colunas por etapa:
 
-| # | Etapa |
-|---|-------|
-| 1 | Novo Lead |
-| 2 | Contato Realizado |
-| 3 | Proposta Enviada |
-| 4 | Negociação |
-| 5 | Fechado Ganho |
-| 6 | Fechado Perdido |
+| #   | Etapa             |
+| --- | ----------------- |
+| 1   | Novo Lead         |
+| 2   | Contato Realizado |
+| 3   | Proposta Enviada  |
+| 4   | Negociação        |
+| 5   | Fechado Ganho     |
+| 6   | Fechado Perdido   |
 
 Cards de negócios com:
 
@@ -120,10 +120,10 @@ Além disso:
 
 ### 3.6 Monetização (Stripe)
 
-| Plano | Limites | Preço |
-|-------|---------|-------|
-| Free | até 2 colaboradores e 50 leads | R$ 0 |
-| Pro | colaboradores e leads ilimitados | R$ 49/mês |
+| Plano | Limites                          | Preço     |
+| ----- | -------------------------------- | --------- |
+| Free  | até 2 colaboradores e 50 leads   | R$ 0      |
+| Pro   | colaboradores e leads ilimitados | R$ 49/mês |
 
 - Checkout integrado via Stripe Checkout
 - Webhook para ativar/desativar plano automaticamente
@@ -161,20 +161,20 @@ cliente/projeto. Começa no plano Free e faz upgrade conforme cresce.
 
 ## 5. Stack Técnica
 
-| Camada | Tecnologia |
-|--------|-----------|
-| Frontend | Next.js 14 (App Router) + React 18 + Tailwind CSS + shadcn/ui |
-| Backend/API | Next.js API Routes (Server Components) |
-| Banco de Dados + Auth | Supabase (PostgreSQL + RLS + Auth) |
-| Pagamento | Stripe (checkout + webhooks) |
-| E-mail transacional | Resend |
-| Drag-and-drop | @dnd-kit |
-| Gráficos | Recharts |
-| Versionamento | Git + GitHub |
-| Deploy | Vercel + Supabase |
-| IDE | Cursor com Claude Code no terminal |
-| Linguagem | TypeScript 5 |
-| Runtime | Node.js |
+| Camada                | Tecnologia                                                    |
+| --------------------- | ------------------------------------------------------------- |
+| Frontend              | Next.js 14 (App Router) + React 18 + Tailwind CSS + shadcn/ui |
+| Backend/API           | Next.js API Routes (Server Components)                        |
+| Banco de Dados + Auth | Supabase (PostgreSQL + RLS + Auth)                            |
+| Pagamento             | Stripe (checkout + webhooks)                                  |
+| E-mail transacional   | Resend                                                        |
+| Drag-and-drop         | @dnd-kit                                                      |
+| Gráficos              | Recharts                                                      |
+| Versionamento         | Git + GitHub                                                  |
+| Deploy                | Vercel + Supabase                                             |
+| IDE                   | Cursor com Claude Code no terminal                            |
+| Linguagem             | TypeScript 5                                                  |
+| Runtime               | Node.js                                                       |
 
 ---
 

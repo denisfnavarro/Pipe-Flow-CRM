@@ -1,3 +1,5 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import localFont from "next/font/local";
@@ -35,6 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <ThemeProvider>
           {children}
           <Toaster />
+          {/* Inertes fora da Vercel: não enviam nada em desenvolvimento. */}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
