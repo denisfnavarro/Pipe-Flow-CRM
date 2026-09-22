@@ -2,15 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SETTINGS_NAV } from "@/lib/nav";
+import { settingsNavFor } from "@/lib/nav";
+import type { MemberRole } from "@/types/domain";
 import { cn } from "@/lib/utils";
 
-export function SettingsTabs() {
+export function SettingsTabs({ role }: { role: MemberRole }) {
   const pathname = usePathname();
 
   return (
     <nav className="flex gap-1 border-b border-border" aria-label="Seções das configurações">
-      {SETTINGS_NAV.map((item) => {
+      {settingsNavFor(role).map((item) => {
         const active = pathname === item.href;
         return (
           <Link

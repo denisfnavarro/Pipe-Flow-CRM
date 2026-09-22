@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney } from "@/lib/format";
 import { countLeads } from "@/lib/data/leads";
 import { requireWorkspace } from "@/lib/auth";
+import { forbidden } from "@/lib/errors";
 import { listMembers } from "@/lib/data/members";
 import { PLAN_LIMITS } from "@/lib/plans";
 
@@ -20,11 +21,12 @@ const PRO_FEATURES = [
 ];
 
 export default async function BillingSettingsPage() {
-  const [{ workspace }, members, leadCount] = await Promise.all([
-    requireWorkspace(),
-    listMembers(),
-    countLeads(),
-  ]);
+  const { workspace } = await requireWorkspace();
+
+  // Plano e cobrança são assunto de admin; a policy de `subscriptions` concorda.
+  if (workspace.role !== "admin") forbidden("Só administradores veem o plano.");
+
+  const [members, leadCount] = await Promise.all([listMembers(), countLeads()]);
 
   const limits = PLAN_LIMITS[workspace.plan];
   const isFree = workspace.plan === "free";

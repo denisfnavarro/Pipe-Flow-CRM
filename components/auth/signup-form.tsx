@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { signupAction } from "@/app/(auth)/actions";
@@ -21,6 +21,12 @@ import { signupSchema, type SignupValues } from "@/lib/validations/auth";
 
 export function SignupForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Quem chega por um convite precisa voltar para ele depois de criar a conta.
+  const next = searchParams.get("next");
+  const destination = next && next.startsWith("/") && !next.startsWith("//") ? next : "/onboarding";
+
   const [error, setError] = useState<string | null>(null);
   const [sent, setSent] = useState<string | null>(null);
 
@@ -44,7 +50,7 @@ export function SignupForm() {
       return;
     }
 
-    router.push("/onboarding");
+    router.push(destination);
     router.refresh();
   }
 

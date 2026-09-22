@@ -22,8 +22,17 @@ export const MAIN_NAV: NavItem[] = [
   { href: "/reports", label: "Relatórios", icon: BarChart3 },
 ];
 
-export const SETTINGS_NAV: NavItem[] = [
+export interface SettingsNavItem extends NavItem {
+  /** Itens de admin somem para quem é membro — e as policies recusam do mesmo jeito. */
+  adminOnly?: boolean;
+}
+
+export const SETTINGS_NAV: SettingsNavItem[] = [
   { href: "/settings/workspace", label: "Workspace", icon: Settings },
-  { href: "/settings/members", label: "Membros", icon: Users },
-  { href: "/settings/billing", label: "Plano e cobrança", icon: BarChart3 },
+  { href: "/settings/members", label: "Membros", icon: Users, adminOnly: true },
+  { href: "/settings/billing", label: "Plano e cobrança", icon: BarChart3, adminOnly: true },
 ];
+
+export function settingsNavFor(role: "admin" | "member"): SettingsNavItem[] {
+  return SETTINGS_NAV.filter((item) => role === "admin" || !item.adminOnly);
+}

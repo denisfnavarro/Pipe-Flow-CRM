@@ -3,7 +3,15 @@ import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/types/database.types";
 
 /** Rotas públicas: tudo o mais dentro de `(app)` exige sessão. */
-const PUBLIC_PATHS = ["/", "/login", "/signup", "/forgot-password", "/reset-password", "/auth"];
+const PUBLIC_PATHS = [
+  "/",
+  "/login",
+  "/signup",
+  "/forgot-password",
+  "/reset-password",
+  "/auth",
+  "/invite",
+];
 const AUTH_PATHS = ["/login", "/signup", "/forgot-password"];
 
 function isPublic(pathname: string): boolean {

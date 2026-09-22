@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MAIN_NAV, SETTINGS_NAV, type NavItem } from "@/lib/nav";
+import { MAIN_NAV, settingsNavFor, type NavItem } from "@/lib/nav";
+import type { MemberRole } from "@/types/domain";
 import { cn } from "@/lib/utils";
 
 function NavLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void }) {
@@ -28,7 +29,13 @@ function NavLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void 
   );
 }
 
-export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
+export function SidebarNav({
+  role,
+  onNavigate,
+}: {
+  role: MemberRole;
+  onNavigate?: () => void;
+}) {
   return (
     <nav className="flex flex-1 flex-col gap-6 px-3 py-4" aria-label="Navegação principal">
       <div className="space-y-1">
@@ -41,7 +48,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         <p className="px-2.5 pb-1 text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
           Configurações
         </p>
-        {SETTINGS_NAV.map((item) => (
+        {settingsNavFor(role).map((item) => (
           <NavLink key={item.href} item={item} onNavigate={onNavigate} />
         ))}
       </div>

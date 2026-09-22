@@ -245,12 +245,12 @@ mesmo workspace veem a mesma ordem.
 **Branch:** `feat/invites`
 **Objetivo:** time real dentro do workspace, com permissões aplicadas.
 
-- [ ] Integração Resend + template de convite
-- [ ] Server Action de convidar: cria `invite` com token e expiração, dispara e-mail
-- [ ] Rota de aceite `invite/[token]`: valida, expira, cria `workspace_member`
-- [ ] Reenviar e revogar convite
-- [ ] Papéis aplicados na UI (membro não vê billing nem gestão de membros) **e** nas policies
-- [ ] Remover membro; impedir remoção do último admin
+- [x] Integração Resend + template de convite _(envio real pendente: domínio 14s.com.br ainda não verificado)_
+- [x] Server Action de convidar: cria `invite` com token e expiração, dispara e-mail
+- [x] Rota de aceite `invite/[token]`: valida, expira, cria `workspace_member`
+- [x] Reenviar e revogar convite
+- [x] Papéis aplicados na UI (membro não vê billing nem gestão de membros) **e** nas policies
+- [x] Remover membro; impedir remoção do último admin
 
 **Verificar:** convidar um segundo e-mail, aceitar em sessão anônima, confirmar o papel
 aplicado nos dois lados.

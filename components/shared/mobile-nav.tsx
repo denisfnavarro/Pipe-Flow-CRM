@@ -7,15 +7,16 @@ import { SidebarNav } from "@/components/shared/sidebar-nav";
 import { WorkspaceSwitcher } from "@/components/shared/workspace-switcher";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import type { Workspace } from "@/types/domain";
+import type { MemberRole, Workspace } from "@/types/domain";
 
 interface MobileNavProps {
   workspaces: Workspace[];
   currentWorkspaceId: string;
+  role: MemberRole;
 }
 
 /** Abaixo de `md` a sidebar vira drawer. */
-export function MobileNav({ workspaces, currentWorkspaceId }: MobileNavProps) {
+export function MobileNav({ workspaces, currentWorkspaceId, role }: MobileNavProps) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -33,7 +34,7 @@ export function MobileNav({ workspaces, currentWorkspaceId }: MobileNavProps) {
         <div className="px-3 pt-3">
           <WorkspaceSwitcher workspaces={workspaces} currentId={currentWorkspaceId} />
         </div>
-        <SidebarNav onNavigate={() => setOpen(false)} />
+        <SidebarNav role={role} onNavigate={() => setOpen(false)} />
       </SheetContent>
     </Sheet>
   );

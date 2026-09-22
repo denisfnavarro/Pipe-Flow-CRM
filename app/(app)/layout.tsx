@@ -26,12 +26,16 @@ export default async function AppLayout({ children }: { children: React.ReactNod
         <div className="px-3 pt-3">
           <WorkspaceSwitcher workspaces={workspaces} currentId={workspace.id} />
         </div>
-        <SidebarNav />
+        <SidebarNav role={workspace.role} />
       </aside>
 
       <div className="flex min-h-dvh flex-col md:pl-60">
         <header className="sticky top-0 z-30 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80">
-          <MobileNav workspaces={workspaces} currentWorkspaceId={workspace.id} />
+          <MobileNav
+            workspaces={workspaces}
+            currentWorkspaceId={workspace.id}
+            role={workspace.role}
+          />
           <span className="md:hidden">
             <Logo showName={false} />
           </span>

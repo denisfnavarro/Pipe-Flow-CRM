@@ -9,6 +9,7 @@ export const metadata: Metadata = { title: "Workspace" };
 
 export default async function WorkspaceSettingsPage() {
   const { workspace } = await requireWorkspace();
+  const isAdmin = workspace.role === "admin";
 
   return (
     <div className="space-y-5">
@@ -22,7 +23,7 @@ export default async function WorkspaceSettingsPage() {
         <CardContent className="space-y-4">
           <div className="space-y-1.5">
             <Label htmlFor="workspace-name">Nome</Label>
-            <Input id="workspace-name" defaultValue={workspace.name} />
+            <Input id="workspace-name" defaultValue={workspace.name} disabled={!isAdmin} />
           </div>
 
           <div className="space-y-1.5">
@@ -39,25 +40,29 @@ export default async function WorkspaceSettingsPage() {
           </div>
 
           <div className="flex justify-end">
-            {/* Persistência entra na M7, junto com a sessão real. */}
-            <Button size="sm">Salvar alterações</Button>
+            {/* Renomear passa a persistir junto com a M11; aqui só o papel manda. */}
+            <Button size="sm" disabled={!isAdmin}>
+              Salvar alterações
+            </Button>
           </div>
         </CardContent>
       </Card>
 
-      <Card className="border-danger/40">
-        <CardHeader className="pb-3">
-          <CardTitle className="text-sm text-danger">Excluir workspace</CardTitle>
-          <p className="text-xs text-muted-foreground">
-            Remove leads, negócios, atividades e membros deste workspace. A ação é definitiva.
-          </p>
-        </CardHeader>
-        <CardContent>
-          <Button size="sm" className="bg-danger text-danger-foreground hover:bg-danger/90">
-            Excluir {workspace.name}
-          </Button>
-        </CardContent>
-      </Card>
+      {isAdmin ? (
+        <Card className="border-danger/40">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm text-danger">Excluir workspace</CardTitle>
+            <p className="text-xs text-muted-foreground">
+              Remove leads, negócios, atividades e membros deste workspace. A ação é definitiva.
+            </p>
+          </CardHeader>
+          <CardContent>
+            <Button size="sm" className="bg-danger text-danger-foreground hover:bg-danger/90">
+              Excluir {workspace.name}
+            </Button>
+          </CardContent>
+        </Card>
+      ) : null}
     </div>
   );
 }

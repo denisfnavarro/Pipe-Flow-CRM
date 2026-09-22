@@ -370,8 +370,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      accept_invite: { Args: { p_token: string }; Returns: string }
       dashboard_metrics: { Args: { p_workspace: string }; Returns: Json }
       immutable_unaccent: { Args: { input: string }; Returns: string }
+      invite_preview: { Args: { p_token: string }; Returns: Json }
       is_workspace_admin: { Args: { ws: string }; Returns: boolean }
       is_workspace_member: { Args: { ws: string }; Returns: boolean }
       move_deal: {
