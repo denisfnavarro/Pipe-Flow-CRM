@@ -41,7 +41,7 @@ export function ForgotPasswordForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {error ? <AuthMessage tone="error">{error}</AuthMessage> : null}
 
         <FormField

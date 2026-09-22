@@ -56,16 +56,28 @@ export async function signupAction(input: unknown): Promise<AuthResult> {
 
   if (error) return { ok: false, error: humanize(error.message) };
 
-  // Sem sessão na resposta, o projeto exige confirmação por e-mail.
-  if (!data.session) {
-    return {
-      ok: true,
-      message: "Enviamos um link de confirmação para o seu e-mail.",
-    };
+  if (data.session) {
+    revalidatePath("/", "layout");
+    return { ok: true };
   }
 
-  revalidatePath("/", "layout");
-  return { ok: true };
+  /*
+   * Ausência de `session` na resposta não basta para concluir que o projeto
+   * exige confirmação: no fluxo PKCE o `signUp` pode devolver `session: null`
+   * mesmo quando a conta já nasce confirmada. Perguntar ao servidor é o que
+   * distingue os dois casos — sem isso, quem se cadastra com a confirmação
+   * desligada fica preso esperando um e-mail que nunca vai chegar.
+   */
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (user) {
+    revalidatePath("/", "layout");
+    return { ok: true };
+  }
+
+  return { ok: true, message: "Enviamos um link de confirmação para o seu e-mail." };
 }
 
 export async function forgotPasswordAction(input: unknown): Promise<AuthResult> {

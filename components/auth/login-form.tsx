@@ -53,7 +53,13 @@ export function LoginForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+      {/*
+          `method="post"` nunca é usado quando o JavaScript carrega — o submit é
+          interceptado. Existe para o caso em que ele não carrega: sem isso o
+          navegador cai no GET nativo e manda a senha na query string, onde ela
+          para no histórico e nos logs do servidor.
+        */}
+      <form method="post" onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
         {error ? <AuthMessage tone="error">{error}</AuthMessage> : null}
 
         <FormField
