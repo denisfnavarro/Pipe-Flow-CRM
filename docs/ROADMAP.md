@@ -50,7 +50,7 @@ backend, só o corpo delas muda.
 - [x] Estrutura de pastas vazia conforme CLAUDE.md (`app/`, `components/`, `lib/`, `types/`)
 - [x] `.env.example` com todas as chaves previstas (Supabase, Stripe, Resend) sem valores
 - [x] GitHub Action de CI: `lint` + `typecheck` em push e PR _(workflow criado; roda no primeiro push)_
-- [ ] Repositório criado no GitHub e `main` publicada _(pendente: sem remoto configurado)_
+- [x] Repositório criado no GitHub e `main` publicada
 
 **Verificar:** `npm run dev` sobe em `localhost:3000`; CI verde no primeiro push.
 **Commit final:** `chore: bootstrap next.js 14 + typescript + tailwind + shadcn`
