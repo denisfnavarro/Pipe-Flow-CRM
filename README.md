@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# PipeFlow CRM
 
-## Getting Started
+CRM SaaS multi-empresa para PMEs, freelancers e times de vendas: pipeline Kanban, gestão de
+leads, timeline de atividades e planos de assinatura.
 
-First, run the development server:
+- **O quê:** [docs/PRD.md](docs/PRD.md)
+- **Como:** [CLAUDE.md](CLAUDE.md)
+- **Em que ordem:** [docs/ROADMAP.md](docs/ROADMAP.md)
+
+## Estado
+
+Fases 1 e 2 do roadmap concluídas (M0 → M5): toda a superfície de interface está construída e
+navegável contra a camada de dados falsa em `lib/mock/`. A Fase 3 (Supabase, auth, Stripe,
+Resend) troca a implementação dessas funções por `lib/data/` sem reescrever componente.
+
+## Rodando localmente
 
 ```bash
+npm install
+cp .env.example .env.local   # ainda não é necessário preencher nada nas fases 1 e 2
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+A aplicação sobe em <http://localhost:3000>.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Script              | O que faz                                  |
+| ------------------- | ------------------------------------------ |
+| `npm run dev`       | servidor de desenvolvimento                |
+| `npm run build`     | build de produção                          |
+| `npm run lint`      | ESLint (gate de milestone)                 |
+| `npm run typecheck` | `tsc --noEmit` (gate de milestone)         |
+| `npm run format`    | Prettier com ordenação de classes Tailwind |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Variáveis de ambiente
 
-## Learn More
+Todas as chaves previstas estão em [.env.example](.env.example), sem valores. Segredos vivem
+apenas em `.env.local` e nas env vars da Vercel — nunca no repositório.
 
-To learn more about Next.js, take a look at the following resources:
+| Variável                                                                                                  | Quando passa a ser necessária       |
+| --------------------------------------------------------------------------------------------------------- | ----------------------------------- |
+| `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`                                               | M6 — schema e RLS                   |
+| `SUPABASE_SERVICE_ROLE_KEY`                                                                               | M11 — apenas em rotinas server-only |
+| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET`, `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`, `STRIPE_PRICE_ID_PRO` | M11 — monetização                   |
+| `RESEND_API_KEY`, `RESEND_FROM_EMAIL`                                                                     | M10 — convites por e-mail           |
+| `NEXT_PUBLIC_APP_URL`                                                                                     | M12 — URLs absolutas em produção    |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## A camada de dados
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`types/domain.ts` define o contrato; `lib/mock/` o implementa em memória com um seed
+determinístico (30 leads, 20 negócios, 60 atividades). Todo componente de tela é um Server
+Component `async` que consome essas funções:
 
-## Deploy on Vercel
+```ts
+listLeads(filters): Promise<Paginated<LeadWithRelations>>
+getLead(id): Promise<LeadDetail | null>
+moveDeal(dealId, stage, position): Promise<void>
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Na Fase 3, `lib/data/` assume as mesmas assinaturas contra o Postgres e `lib/mock/` é removido.
