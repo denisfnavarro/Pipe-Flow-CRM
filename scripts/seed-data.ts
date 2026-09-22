@@ -10,12 +10,13 @@ import type {
 } from "@/types/domain";
 
 /**
- * Seed determinístico da camada mock.
+ * Gerador determinístico dos dados de demonstração.
  *
- * Um PRNG com semente fixa mantém os dados idênticos entre o render do servidor
- * e o do cliente — sem isso o React acusa hydration mismatch. Datas são
- * calculadas a partir de `NOW` para que prazos vencidos e próximos continuem
- * fazendo sentido em qualquer dia em que o projeto rodar.
+ * Nasceu como camada mock da Fase 2 e sobreviveu à troca para o Postgres: é o
+ * que garante que o banco tenha exatamente o mesmo conteúdo que as telas
+ * mostravam antes do backend existir. Datas são calculadas a partir de `NOW`
+ * para que prazos vencidos e próximos continuem fazendo sentido em qualquer dia
+ * em que o seed rodar.
  */
 function createRandom(seed: number) {
   let state = seed;

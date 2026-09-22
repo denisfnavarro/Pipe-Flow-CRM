@@ -180,6 +180,7 @@ export type Database = {
           name: string
           owner_id: string
           phone: string | null
+          search_text: string | null
           status: Database["public"]["Enums"]["lead_status"]
           title: string | null
           workspace_id: string
@@ -192,6 +193,7 @@ export type Database = {
           name: string
           owner_id: string
           phone?: string | null
+          search_text?: string | null
           status?: Database["public"]["Enums"]["lead_status"]
           title?: string | null
           workspace_id: string
@@ -204,6 +206,7 @@ export type Database = {
           name?: string
           owner_id?: string
           phone?: string | null
+          search_text?: string | null
           status?: Database["public"]["Enums"]["lead_status"]
           title?: string | null
           workspace_id?: string
@@ -367,8 +370,18 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      dashboard_metrics: { Args: { p_workspace: string }; Returns: Json }
+      immutable_unaccent: { Args: { input: string }; Returns: string }
       is_workspace_admin: { Args: { ws: string }; Returns: boolean }
       is_workspace_member: { Args: { ws: string }; Returns: boolean }
+      move_deal: {
+        Args: {
+          p_deal_id: string
+          p_position: number
+          p_stage: Database["public"]["Enums"]["deal_stage"]
+        }
+        Returns: undefined
+      }
     }
     Enums: {
       activity_type: "call" | "email" | "meeting" | "note"

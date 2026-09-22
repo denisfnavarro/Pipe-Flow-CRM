@@ -3,7 +3,7 @@ import { NewDealButton } from "@/components/pipeline/new-deal-button";
 import { PipelineBoard } from "@/components/pipeline/pipeline-board";
 import { Money } from "@/components/shared/money";
 import { PageHeader } from "@/components/shared/page-header";
-import { listDeals } from "@/lib/mock/deals";
+import { listDeals } from "@/lib/data/deals";
 import { listLeads } from "@/lib/data/leads";
 import { listMembers } from "@/lib/data/members";
 import { OPEN_STAGES } from "@/types/domain";

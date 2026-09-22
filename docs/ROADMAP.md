@@ -210,12 +210,12 @@ redireciona.
 **Branch:** `feat/leads-backend`
 **Objetivo:** substituir o mock de leads e atividades por Supabase, sem tocar nas telas.
 
-- [ ] `lib/data/leads.ts` e `lib/data/activities.ts` com a assinatura do contrato da M1
-- [ ] Server Actions de criar, editar e excluir lead, validadas com Zod
-- [ ] Busca e filtros executados no Postgres (`ilike`, filtros, paginação por range)
-- [ ] Server Action de registrar atividade, com autor vindo da sessão
-- [ ] `revalidatePath` nas mutações; toasts de sucesso e erro
-- [ ] Remover `lib/mock/leads.ts` e `activities.ts`
+- [x] `lib/data/leads.ts` e `lib/data/activities.ts` com a assinatura do contrato da M1
+- [x] Server Actions de criar, editar e excluir lead, validadas com Zod
+- [x] Busca e filtros executados no Postgres (`ilike`, filtros, paginação por range)
+- [x] Server Action de registrar atividade, com autor vindo da sessão
+- [x] `revalidatePath` nas mutações; toasts de sucesso e erro
+- [x] Remover `lib/mock/leads.ts` e `activities.ts`
 
 **Verificar:** CRUD completo persistindo; recarregar a página mantém os dados.
 **Commit final:** `feat: persistência de leads e atividades no supabase`
@@ -227,12 +227,12 @@ redireciona.
 **Branch:** `feat/pipeline-backend`
 **Objetivo:** negócios persistidos, com a ordem do Kanban estável.
 
-- [ ] `lib/data/deals.ts` conforme o contrato
-- [ ] Server Actions de criar, editar e excluir negócio
-- [ ] Action `moveDeal(dealId, stage, position)` reordenando em transação
-- [ ] Otimismo da M4 ligado à action real, com rollback no erro
-- [ ] Agregados de dashboard calculados no banco (contagens, soma, taxa de conversão)
-- [ ] Remover `lib/mock/deals.ts`
+- [x] `lib/data/deals.ts` conforme o contrato
+- [x] Server Actions de criar, editar e excluir negócio
+- [x] Action `moveDeal(dealId, stage, position)` reordenando em transação
+- [x] Otimismo da M4 ligado à action real, com rollback no erro
+- [x] Agregados de dashboard calculados no banco (contagens, soma, taxa de conversão)
+- [x] Remover `lib/mock/deals.ts`
 
 **Verificar:** arrastar um card, recarregar: etapa e posição preservadas. Dois usuários no
 mesmo workspace veem a mesma ordem.

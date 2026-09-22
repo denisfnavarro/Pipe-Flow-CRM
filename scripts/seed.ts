@@ -1,9 +1,9 @@
 /**
- * Semeia o banco com os mesmos dados de `lib/mock/seed.ts`.
+ * Semeia o banco com os dados de demonstração de `seed-data.ts`.
  *
- * Reusar o gerador do mock garante que a tela construída na Fase 2 e a tela
- * lida do Postgres na Fase 3 mostrem o mesmo conteúdo — a troca de `lib/mock/`
- * por `lib/data/` fica verificável a olho nu.
+ * É o mesmo gerador que alimentava a camada mock da Fase 2, o que torna a
+ * troca de `lib/mock/` por `lib/data/` verificável a olho nu: os números na
+ * tela têm de continuar os mesmos.
  *
  * Tudo passa pela API HTTPS com a service_role: nenhuma conexão direta ao
  * Postgres, nenhuma senha de banco envolvida.
@@ -15,7 +15,7 @@
  * dono, o que tornaria o teste de isolamento incapaz de provar qualquer coisa.
  */
 import { createClient } from "@supabase/supabase-js";
-import { buildSeed, MEMBERS, WORKSPACES } from "../lib/mock/seed";
+import { buildSeed, MEMBERS, WORKSPACES } from "./seed-data";
 
 const URL = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;

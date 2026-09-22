@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createDeal, deleteDeal, moveDeal, updateDeal } from "@/lib/mock/deals";
+import { createDeal, deleteDeal, moveDeal, updateDeal } from "@/lib/data/deals";
 import { dealSchema, moveDealSchema } from "@/lib/validations/deal";
 import type { DealStage } from "@/types/domain";
 

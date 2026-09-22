@@ -8,17 +8,23 @@ import { PageHeader } from "@/components/shared/page-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney, formatPercent } from "@/lib/format";
-import { getDashboardMetrics, listUpcomingDeals } from "@/lib/mock/dashboard";
-import { getCurrentMember } from "@/lib/mock/workspace";
+import { getDashboardMetrics, listUpcomingDeals } from "@/lib/data/dashboard";
+import { requireSession } from "@/lib/auth";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
 export default async function DashboardPage() {
-  const [metrics, upcoming, member] = await Promise.all([
+  const [metrics, upcoming, user] = await Promise.all([
     getDashboardMetrics(),
     listUpcomingDeals(),
-    getCurrentMember(),
+    requireSession(),
   ]);
+
+  const firstName = (
+    (user.user_metadata?.full_name as string | undefined) ??
+    user.email ??
+    ""
+  ).split(/[ @]/)[0];
 
   const closed = metrics.funnel
     .filter((row) => row.stage === "won" || row.stage === "lost")
@@ -27,7 +33,7 @@ export default async function DashboardPage() {
   return (
     <div className="space-y-5">
       <PageHeader
-        title={`Olá, ${member.name.split(" ")[0]}`}
+        title={firstName ? `Olá, ${firstName}` : "Dashboard"}
         description="Visão geral do funil, metas e prazos do time."
         action={
           <Button asChild size="sm" variant="outline">
