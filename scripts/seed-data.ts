@@ -40,17 +40,20 @@ function daysFromNow(days: number): string {
   return date.toISOString();
 }
 
+// A Acme nasce no Pro porque tem quatro pessoas e trinta leads — não caberia
+// no Free, e os limites do Free são impostos por trigger no banco.
 export const WORKSPACE: Workspace = {
   id: "ws_pipeflow",
   name: "Acme Consultoria",
   slug: "acme-consultoria",
-  plan: "free",
+  plan: "pro",
   ownerId: "usr_1",
 };
 
 export const WORKSPACES: Workspace[] = [
   WORKSPACE,
-  { id: "ws_2", name: "Nimbus Tech", slug: "nimbus-tech", plan: "pro", ownerId: "usr_1" },
+  // A Nimbus fica no Free, com uma pessoa só: é onde dá para exercitar o paywall.
+  { id: "ws_2", name: "Nimbus Tech", slug: "nimbus-tech", plan: "free", ownerId: "usr_1" },
   { id: "ws_3", name: "Estúdio Vértice", slug: "estudio-vertice", plan: "free", ownerId: "usr_2" },
 ];
 

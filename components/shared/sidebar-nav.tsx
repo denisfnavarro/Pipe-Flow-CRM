@@ -29,13 +29,7 @@ function NavLink({ item, onNavigate }: { item: NavItem; onNavigate?: () => void 
   );
 }
 
-export function SidebarNav({
-  role,
-  onNavigate,
-}: {
-  role: MemberRole;
-  onNavigate?: () => void;
-}) {
+export function SidebarNav({ role, onNavigate }: { role: MemberRole; onNavigate?: () => void }) {
   return (
     <nav className="flex flex-1 flex-col gap-6 px-3 py-4" aria-label="Navegação principal">
       <div className="space-y-1">

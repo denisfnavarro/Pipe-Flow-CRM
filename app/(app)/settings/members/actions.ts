@@ -11,7 +11,8 @@ import {
 import { inviteSchema } from "@/lib/validations/auth";
 import type { MemberRole } from "@/types/domain";
 
-export type ActionResult = { ok: true; message?: string } | { ok: false; error: string };
+export type ActionResult =
+  { ok: true; message?: string } | { ok: false; error: string; paywall?: boolean };
 
 /**
  * Traduz o erro para a voz do produto. As mensagens do trigger e das funções
@@ -24,6 +25,9 @@ function toMessage(error: unknown, fallback: string): string {
     return "O workspace precisa de pelo menos um administrador.";
   }
   if (message.includes("já faz parte")) return message;
+  if (message.includes("plano Free permite")) {
+    return message.slice(message.indexOf("O plano"));
+  }
   return message.startsWith("Não foi possível") ? message : fallback;
 }
 
@@ -36,7 +40,8 @@ export async function inviteMemberAction(input: unknown): Promise<ActionResult> 
   try {
     await createInvite(parsed.data.email, parsed.data.role);
   } catch (error) {
-    return { ok: false, error: toMessage(error, "Não foi possível enviar o convite") };
+    const message = toMessage(error, "Não foi possível enviar o convite");
+    return { ok: false, error: message, paywall: message.includes("plano Free") };
   }
 
   revalidatePath("/settings/members");

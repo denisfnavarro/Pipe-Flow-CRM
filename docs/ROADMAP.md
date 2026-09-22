@@ -263,16 +263,16 @@ aplicado nos dois lados.
 **Branch:** `feat/stripe-billing`
 **Objetivo:** upgrade e downgrade automáticos, limites do Free aplicados.
 
-- [ ] Produto e preço no Stripe (R$ 49/mês); `lib/stripe/plans.ts`
-- [ ] Server Action criando sessão de Stripe Checkout
-- [ ] Webhook em `app/api/stripe/webhook/route.ts` (raw body, verificação de assinatura,
+- [x] Produto e preço no Stripe (R$ 49/mês); `lib/stripe/plans.ts`
+- [x] Server Action criando sessão de Stripe Checkout
+- [x] Webhook em `app/api/stripe/webhook/route.ts` (raw body, verificação de assinatura,
       idempotência) tratando `checkout.session.completed`,
       `customer.subscription.updated` e `deleted`
-- [ ] Sincronizar `subscriptions` e `workspaces.plan`
-- [ ] Customer Portal para gerenciar assinatura
-- [ ] Enforcement do Free: 2 colaboradores e 50 leads — checado no servidor, nunca só na UI
-- [ ] Paywall na UI com CTA de upgrade ao atingir o limite
-- [ ] Testado com `stripe listen` e cartões de teste
+- [x] Sincronizar `subscriptions` e `workspaces.plan`
+- [x] Customer Portal para gerenciar assinatura
+- [x] Enforcement do Free: 2 colaboradores e 50 leads — checado no servidor, nunca só na UI
+- [x] Paywall na UI com CTA de upgrade ao atingir o limite
+- [x] Testado com `stripe listen` e cartões de teste
 
 **Verificar:** assinar no modo teste → plano vira Pro e limites somem; cancelar no portal →
 volta para Free.

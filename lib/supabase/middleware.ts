@@ -2,7 +2,13 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import type { Database } from "@/types/database.types";
 
-/** Rotas públicas: tudo o mais dentro de `(app)` exige sessão. */
+/**
+ * Rotas públicas: tudo o mais dentro de `(app)` exige sessão.
+ *
+ * `/api/stripe` está aqui porque o webhook chega da Stripe, sem cookie nenhum —
+ * redirecioná-lo para o login faria a Stripe receber um 307 e marcar o endpoint
+ * como falho. Ele se autentica pela assinatura do corpo, não por sessão.
+ */
 const PUBLIC_PATHS = [
   "/",
   "/login",
@@ -11,6 +17,7 @@ const PUBLIC_PATHS = [
   "/reset-password",
   "/auth",
   "/invite",
+  "/api/stripe",
 ];
 const AUTH_PATHS = ["/login", "/signup", "/forgot-password"];
 

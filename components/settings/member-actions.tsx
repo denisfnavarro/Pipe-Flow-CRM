@@ -3,10 +3,7 @@
 import { MoreHorizontal } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
-import {
-  removeMemberAction,
-  updateMemberRoleAction,
-} from "@/app/(app)/settings/members/actions";
+import { removeMemberAction, updateMemberRoleAction } from "@/app/(app)/settings/members/actions";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,

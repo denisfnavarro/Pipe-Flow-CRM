@@ -10,7 +10,23 @@ import { leadSchema } from "@/lib/validations/lead";
  * Resultado uniforme das Server Actions: a UI decide entre toast de sucesso e
  * de erro sem precisar de try/catch em cada formulário.
  */
-export type ActionResult = { ok: true } | { ok: false; error: string };
+export type ActionResult =
+  | { ok: true }
+  /** `paywall` faz a UI oferecer o upgrade em vez de só mostrar o erro. */
+  | { ok: false; error: string; paywall?: boolean };
+
+/** Os limites do plano vêm de um trigger no banco, com mensagem já em português. */
+function isPlanLimit(error: unknown): boolean {
+  return error instanceof Error && error.message.includes("plano Free permite");
+}
+
+function describe(error: unknown, fallback: string): { error: string; paywall?: boolean } {
+  if (isPlanLimit(error)) {
+    const message = (error as Error).message;
+    return { error: message.slice(message.indexOf("O plano")), paywall: true };
+  }
+  return { error: fallback };
+}
 
 export async function createLeadAction(input: unknown): Promise<ActionResult> {
   const parsed = leadSchema.safeParse(input);
@@ -18,7 +34,12 @@ export async function createLeadAction(input: unknown): Promise<ActionResult> {
     return { ok: false, error: parsed.error.issues[0]?.message ?? "Dados inválidos" };
   }
 
-  await createLead(parsed.data);
+  try {
+    await createLead(parsed.data);
+  } catch (error) {
+    return { ok: false, ...describe(error, "Não foi possível criar o lead") };
+  }
+
   revalidatePath("/leads");
   revalidatePath("/dashboard");
   return { ok: true };

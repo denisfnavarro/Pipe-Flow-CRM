@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { usageRatio } from "@/lib/plans";
+import { usageRatio } from "@/lib/usage";
 
 interface UsageMeterProps {
   label: string;

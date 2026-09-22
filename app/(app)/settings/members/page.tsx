@@ -16,7 +16,7 @@ import { requireWorkspace } from "@/lib/auth";
 import { listInvites } from "@/lib/data/invites";
 import { listMembers } from "@/lib/data/members";
 import { formatDate, formatRelative } from "@/lib/format";
-import { PLAN_LIMITS } from "@/lib/plans";
+import { PLANS } from "@/lib/stripe/plans";
 import { cn } from "@/lib/utils";
 import { forbidden } from "@/lib/errors";
 
@@ -39,7 +39,7 @@ export default async function MembersSettingsPage() {
 
   const [members, invites] = await Promise.all([listMembers(), listInvites()]);
 
-  const seats = PLAN_LIMITS[workspace.plan].seats;
+  const seats = PLANS[workspace.plan].seats;
   const pending = invites.filter((invite) => invite.status === "pending").length;
   const used = members.length + pending;
   const atLimit = seats !== null && used >= seats;
@@ -56,7 +56,7 @@ export default async function MembersSettingsPage() {
         <CardContent>
           <InviteForm
             disabled={atLimit}
-            disabledReason={`O plano ${PLAN_LIMITS[workspace.plan].label} permite até ${seats} pessoas, contando convites pendentes. Faça upgrade para convidar mais.`}
+            disabledReason={`O plano ${PLANS[workspace.plan].label} permite até ${seats} pessoas, contando convites pendentes. Faça upgrade para convidar mais.`}
           />
         </CardContent>
       </Card>

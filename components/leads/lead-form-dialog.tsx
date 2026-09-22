@@ -31,6 +31,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { paywallToast } from "@/components/settings/paywall-toast";
 import { useToast } from "@/hooks/use-toast";
 import { LEAD_STATUS_LABELS } from "@/lib/stages";
 import { leadSchema, type LeadFormValues } from "@/lib/validations/lead";
@@ -75,7 +76,11 @@ export function LeadFormDialog({ members, lead, trigger }: LeadFormDialogProps) 
     const result = lead ? await updateLeadAction(lead.id, values) : await createLeadAction(values);
 
     if (!result.ok) {
-      toast({ variant: "destructive", title: "Algo deu errado", description: result.error });
+      toast(
+        "paywall" in result && result.paywall
+          ? paywallToast(result.error)
+          : { variant: "destructive", title: "Algo deu errado", description: result.error },
+      );
       return;
     }
 

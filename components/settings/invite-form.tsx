@@ -22,10 +22,17 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { paywallToast } from "@/components/settings/paywall-toast";
 import { useToast } from "@/hooks/use-toast";
 import { inviteSchema, type InviteValues } from "@/lib/validations/auth";
 
-export function InviteForm({ disabled, disabledReason }: { disabled?: boolean; disabledReason?: string }) {
+export function InviteForm({
+  disabled,
+  disabledReason,
+}: {
+  disabled?: boolean;
+  disabledReason?: string;
+}) {
   const router = useRouter();
   const { toast } = useToast();
 
@@ -38,7 +45,15 @@ export function InviteForm({ disabled, disabledReason }: { disabled?: boolean; d
     const result = await inviteMemberAction(values);
 
     if (!result.ok) {
-      toast({ variant: "destructive", title: "Não foi possível convidar", description: result.error });
+      toast(
+        "paywall" in result && result.paywall
+          ? paywallToast(result.error)
+          : {
+              variant: "destructive",
+              title: "Não foi possível convidar",
+              description: result.error,
+            },
+      );
       return;
     }
 
