@@ -1,0 +1,169 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 # PROJECT ARCHITECTURE: Meu Projeto\
+\
+## 1. CONTEXT & PROBLEM\
+\
+Pequenas e m\'e9dias empresas, freelancers e times de vendas perdem oportunidades de neg\'f3cio por falta de organiza\'e7\'e3o no processo comercial. Leads s\'e3o gerenciados em planilhas, anota\'e7\'f5es soltas ou ferramentas gen\'e9ricas que n\'e3o oferecem vis\'e3o clara do funil de vendas.\
+\
+N\'e3o h\'e1 registro centralizado de intera\'e7\'f5es com clientes, e quando a equipe cresce, os dados ficam espalhados sem controle de acesso por empresa/time.\
+\
+Solu\'e7\'f5es como HubSpot e Pipedrive existem, mas s\'e3o caras ou complexas demais para quem est\'e1 come\'e7ando.\
+\
+## 2. PROPOSED SOLUTION\
+\
+Construir o PipeFlow CRM \'97 uma plataforma SaaS de gest\'e3o de clientes e vendas, multi-empresa, com pipeline visual Kanban, gest\'e3o completa de leads e neg\'f3cios, registro de intera\'e7\'f5es e integra\'e7\'e3o de pagamento para monetiza\'e7\'e3o.\
+\
+CRM completo com cadastro de leads/contatos (nome, e-mail, telefone, empresa, cargo)\
+Pipeline Kanban de vendas com drag-and-drop entre etapas\
+P\'e1gina de detalhe do lead com hist\'f3rico completo de atividades\
+Sistema multi-empresa com convite de colaboradores por e-mail\
+Dashboard com m\'e9tricas de vendas e gr\'e1fico de funil\
+Monetiza\'e7\'e3o via planos de assinatura\
+Landing page de apresenta\'e7\'e3o do produto\
+\
+## 3. FUNCTIONAL REQUIREMENTS\
+\
+- Login e Autentica\'e7\'e3o\
+- Kanban\
+- Dashboards\
+- Multi usu\'e1rio\
+- Multi empresa\
+- Permiss\'f5es por usu\'e1rio\
+- Parte premium (paga)\
+- Calend\'e1rio\
+- Relat\'f3rios e Exporta\'e7\'e3o\
+- Integra\'e7\'f5es (API)\
+- Landing Page\
+- Busca e Filtros\
+- Onboarding do Usu\'e1rio\
+\
+Gest\'e3o de Leads e Contatos\
+Cadastro completo: nome, e-mail, telefone, empresa, cargo, status\
+Listagem com busca e filtros (por status, respons\'e1vel, data)\
+P\'e1gina de detalhe com perfil completo e timeline de atividades\
+Pipeline Kanban de Vendas\
+Colunas por etapa:\
+Novo Lead\
+Contato Realizado\
+Proposta Enviada\
+Negocia\'e7\'e3o\
+Fechado Ganho\
+Fechado Perdido\
+Cards de neg\'f3cios com:\
+T\'edtulo\
+Valor estimado (R$)\
+Lead vinculado\
+Respons\'e1vel\
+Prazo\
+Drag-and-drop entre etapas com persist\'eancia no banco\
+Registro de Atividades\
+Tipos:\
+Liga\'e7\'e3o\
+E-mail\
+Reuni\'e3o\
+Nota\
+Campos:\
+Autor\
+Descri\'e7\'e3o\
+Data\
+Timeline cronol\'f3gica vinculada ao lead\
+Dashboard de M\'e9tricas\
+Cards:\
+Total de leads\
+Neg\'f3cios abertos\
+Valor total do pipeline\
+Taxa de convers\'e3o\
+Gr\'e1fico de funil de vendas (Recharts)\
+Neg\'f3cios do usu\'e1rio logado com prazo pr\'f3ximo\
+Multi-empresa e Colabora\'e7\'e3o\
+Criar workspaces (cada empresa/time = 1 workspace)\
+Convite de colaboradores por e-mail (com Resend)\
+Pap\'e9is:\
+Admin (acesso total)\
+Membro (leads e neg\'f3cios)\
+Alternar entre workspaces via dropdown na sidebar\
+Isolamento de dados via Row Level Security (RLS) no Supabase\
+Monetiza\'e7\'e3o (Stripe)\
+Plano Free: at\'e9 2 colaboradores e 50 leads\
+Plano Pro: colaboradores e leads ilimitados (R$49/m\'eas)\
+Checkout integrado via Stripe Checkout\
+Webhook para ativar/desativar plano automaticamente\
+Customer Portal do Stripe para gerenciamento de assinatura\
+Landing Page\
+P\'e1gina p\'fablica de apresenta\'e7\'e3o do PipeFlow CRM\
+Se\'e7\'f5es:\
+Hero\
+Funcionalidades\
+Planos e pre\'e7os\
+CTA\
+\
+## 4. USER PERSONAS\
+\
+Dono do Neg\'f3cio / Empreendedor (Admin)\
+Pequeno empres\'e1rio que precisa organizar seu processo de vendas. Cria o workspace, convida o time, gerencia planos e possui acesso completo \'e0s funcionalidades.\
+\
+Vendedor / Colaborador (Membro)\
+Profissional de vendas que utiliza o CRM no dia a dia. Cadastra leads, move neg\'f3cios no pipeline e registra atividades. Pode participar de m\'faltiplos workspaces.\
+\
+Freelancer / Consultor (Admin Solo)\
+Profissional independente que atende v\'e1rios clientes. Utiliza workspaces separados para cada cliente/projeto. Come\'e7a no plano Free e faz upgrade conforme cresce.\
+\
+## 5. TECHNICAL STACK\
+\
+- Next.js\
+- React\
+- Tailwind CSS\
+- shadcn/ui\
+- Supabase\
+- Stripe\
+- Vercel\
+- Claude Code\
+- Node.js\
+- PostgreSQL\
+- TypeScript\
+- Resend (e-mails)\
+\
+Frontend: Next.js 14 (App Router) + React 18 + Tailwind CSS + shadcn/ui\
+Backend/API: Next.js API Routes (Server Components)\
+Banco de Dados + Auth: Supabase (PostgreSQL + RLS + Auth)\
+Pagamento: Stripe (checkout + webhooks)\
+E-mail transacional: Resend\
+Drag-and-drop: @dnd-kit\
+Gr\'e1ficos: Recharts\
+Versionamento: Git + GitHub\
+Deploy: Vercel + Supabase\
+IDE: Cursor com Claude Code no terminal\
+Linguagem: TypeScript 5\
+\
+## 6. DESIGN LANGUAGE\
+\
+Refer\'eancias: HubSpot CRM, Pipedrive e DataCrazy.\
+\
+HubSpot CRM\
+CRM gratuito mais popular do mercado\
+Pipeline visual, gest\'e3o de contatos e automa\'e7\'f5es de marketing\
+Pontos fortes: ecossistema completo, integra\'e7\'f5es abundantes\
+Pontos fracos: complexo para PMEs e planos caros\
+Insight: simplificar a experi\'eancia focando apenas em vendas\
+Pipedrive\
+CRM focado em vendas com pipeline visual excelente\
+Pontos fortes: UX intuitiva e pipeline Kanban refer\'eancia de mercado\
+Pontos fracos: aus\'eancia de plano gratuito e recursos avan\'e7ados caros\
+Insight: modelo freemium acess\'edvel inspirado no Pipedrive\
+\
+## 7. PROCESS\
+\
+- Break app build into logical milestones (steps)\
+- Each milestone should be a deliverable increment\
+- Prioritize core functionality first, then iterate\
+- Test each milestone before moving to the next\
+\
+---\
+> Generated by NoCodeStartup Framework \'97 optimized for Claude Code\
+}
