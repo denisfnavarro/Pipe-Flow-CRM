@@ -42,15 +42,15 @@ backend, só o corpo delas muda.
 **Branch:** `chore/setup`
 **Objetivo:** repositório e toolchain prontos, app rodando em branco sem erro de lint ou tipo.
 
-- [ ] `git init`, `.gitignore` (Next.js + `.env*.local`), commit inicial em `main`
-- [ ] `create-next-app`: App Router, TypeScript, Tailwind, ESLint, alias `@/*`
-- [ ] `tsconfig.json` em `strict: true`
-- [ ] Prettier + `prettier-plugin-tailwindcss`, scripts `lint`, `format`, `typecheck`
-- [ ] `npx shadcn@latest init`
-- [ ] Estrutura de pastas vazia conforme CLAUDE.md (`app/`, `components/`, `lib/`, `types/`)
-- [ ] `.env.example` com todas as chaves previstas (Supabase, Stripe, Resend) sem valores
-- [ ] GitHub Action de CI: `lint` + `typecheck` em push e PR
-- [ ] Repositório criado no GitHub e `main` publicada
+- [x] `git init`, `.gitignore` (Next.js + `.env*.local`), commit inicial em `main`
+- [x] `create-next-app`: App Router, TypeScript, Tailwind, ESLint, alias `@/*`
+- [x] `tsconfig.json` em `strict: true`
+- [x] Prettier + `prettier-plugin-tailwindcss`, scripts `lint`, `format`, `typecheck`
+- [x] `npx shadcn@latest init`
+- [x] Estrutura de pastas vazia conforme CLAUDE.md (`app/`, `components/`, `lib/`, `types/`)
+- [x] `.env.example` com todas as chaves previstas (Supabase, Stripe, Resend) sem valores
+- [x] GitHub Action de CI: `lint` + `typecheck` em push e PR _(workflow criado; roda no primeiro push)_
+- [ ] Repositório criado no GitHub e `main` publicada _(pendente: sem remoto configurado)_
 
 **Verificar:** `npm run dev` sobe em `localhost:3000`; CI verde no primeiro push.
 **Commit final:** `chore: bootstrap next.js 14 + typescript + tailwind + shadcn`
@@ -63,18 +63,18 @@ backend, só o corpo delas muda.
 **Objetivo:** tokens visuais, componentes base e o layout autenticado navegável (sem dados
 reais e sem login).
 
-- [ ] Tokens de cor em `globals.css` (`:root` + `.dark`) conforme a seção Identidade visual
+- [x] Tokens de cor em `globals.css` (`:root` + `.dark`) conforme a seção Identidade visual
       do CLAUDE.md; `tailwind.config.ts` mapeando os tokens
-- [ ] Fontes Inter e Geist Mono via `next/font`
-- [ ] Componentes shadcn instalados: button, input, select, dialog, dropdown-menu, table,
+- [x] Fontes Inter e Geist Mono via `next/font`
+- [x] Componentes shadcn instalados: button, input, select, dialog, dropdown-menu, table,
       card, badge, avatar, tabs, toast, skeleton, form
-- [ ] Toggle de dark mode (`next-themes`) no header
-- [ ] `components/shared/`: `page-header`, `empty-state`, `stage-badge`, `money` (formatador BRL)
-- [ ] Layout `app/(app)/layout.tsx`: sidebar com navegação, workspace switcher (estático),
+- [x] Toggle de dark mode (`next-themes`) no header
+- [x] `components/shared/`: `page-header`, `empty-state`, `stage-badge`, `money` (formatador BRL)
+- [x] Layout `app/(app)/layout.tsx`: sidebar com navegação, workspace switcher (estático),
       menu de usuário
-- [ ] Rotas placeholder: dashboard, leads, pipeline, calendar, reports, settings
-- [ ] Responsivo: sidebar vira drawer abaixo de `md`
-- [ ] **Contrato da camada de dados** definido em `lib/mock/` + tipos em `types/domain.ts`,
+- [x] Rotas placeholder: dashboard, leads, pipeline, calendar, reports, settings
+- [x] Responsivo: sidebar vira drawer abaixo de `md`
+- [x] **Contrato da camada de dados** definido em `lib/mock/` + tipos em `types/domain.ts`,
       com seed de ~30 leads, ~20 deals e ~60 atividades
 
 **Verificar:** navegar por todas as rotas nos dois temas, em desktop e mobile, sem quebra.
@@ -89,13 +89,13 @@ reais e sem login).
 **Branch:** `feat/landing-page`
 **Objetivo:** página pública de apresentação, pronta para produção.
 
-- [ ] `app/(marketing)/page.tsx` com hero (headline, subheadline, CTA, screenshot do produto)
-- [ ] Seção de funcionalidades (pipeline, leads, atividades, dashboard, multi-empresa)
-- [ ] Seção de planos: Free (2 colaboradores, 50 leads) e Pro (R$ 49/mês, ilimitado)
-- [ ] CTA final + footer
-- [ ] Header público com links e botões Entrar / Criar conta
-- [ ] SEO: metadata, Open Graph, `favicon`, `sitemap.ts`, `robots.ts`
-- [ ] Responsivo e acessível (contraste, foco visível, hierarquia de headings)
+- [x] `app/(marketing)/page.tsx` com hero (headline, subheadline, CTA, screenshot do produto)
+- [x] Seção de funcionalidades (pipeline, leads, atividades, dashboard, multi-empresa)
+- [x] Seção de planos: Free (2 colaboradores, 50 leads) e Pro (R$ 49/mês, ilimitado)
+- [x] CTA final + footer
+- [x] Header público com links e botões Entrar / Criar conta
+- [x] SEO: metadata, Open Graph, `favicon`, `sitemap.ts`, `robots.ts`
+- [x] Responsivo e acessível (contraste, foco visível, hierarquia de headings)
 
 **Verificar:** Lighthouse ≥ 90 em performance e acessibilidade.
 **Commit final:** `feat: landing page com hero, features, pricing e cta`
@@ -107,16 +107,16 @@ reais e sem login).
 **Branch:** `feat/leads-ui`
 **Objetivo:** listagem e detalhe de leads completos, lendo de `lib/mock/`.
 
-- [ ] Tabela de leads: nome, empresa, cargo, e-mail, telefone, status, responsável
-- [ ] Busca por texto e filtros por status, responsável e período (estado na URL via
+- [x] Tabela de leads: nome, empresa, cargo, e-mail, telefone, status, responsável
+- [x] Busca por texto e filtros por status, responsável e período (estado na URL via
       `searchParams`)
-- [ ] Paginação e ordenação por coluna
-- [ ] Dialog de criar/editar lead com React Hook Form + Zod
-- [ ] Confirmação de exclusão
-- [ ] Página de detalhe `leads/[id]`: cartão de perfil, negócios vinculados, timeline de
+- [x] Paginação e ordenação por coluna
+- [x] Dialog de criar/editar lead com React Hook Form + Zod
+- [x] Confirmação de exclusão
+- [x] Página de detalhe `leads/[id]`: cartão de perfil, negócios vinculados, timeline de
       atividades com ícone por tipo (ligação, e-mail, reunião, nota)
-- [ ] Composer de atividade na timeline
-- [ ] Estados de loading (skeleton), vazio e erro
+- [x] Composer de atividade na timeline
+- [x] Estados de loading (skeleton), vazio e erro
 
 **Verificar:** filtrar, criar, editar e excluir no mock; recarregar a página mantém os filtros.
 **Commit final:** `feat: listagem, filtros e página de detalhe de leads`
@@ -128,15 +128,15 @@ reais e sem login).
 **Branch:** `feat/pipeline-ui`
 **Objetivo:** quadro Kanban com drag-and-drop funcionando contra o mock.
 
-- [ ] Seis colunas na ordem do PRD, com cor e contador por etapa
-- [ ] Card de negócio: título, valor em BRL, lead vinculado, responsável (avatar), prazo
-- [ ] Destaque de prazo: âmbar para próximo, vermelho para vencido
-- [ ] Drag-and-drop com `@dnd-kit` entre colunas e reordenação dentro da coluna
-- [ ] Atualização otimista + rollback em caso de falha
-- [ ] Soma de valores no cabeçalho de cada coluna
-- [ ] Dialog de criar/editar negócio (título, valor, lead, responsável, prazo, etapa)
-- [ ] Acessibilidade do DnD: mover card por teclado
-- [ ] Scroll horizontal em telas estreitas
+- [x] Seis colunas na ordem do PRD, com cor e contador por etapa
+- [x] Card de negócio: título, valor em BRL, lead vinculado, responsável (avatar), prazo
+- [x] Destaque de prazo: âmbar para próximo, vermelho para vencido
+- [x] Drag-and-drop com `@dnd-kit` entre colunas e reordenação dentro da coluna
+- [x] Atualização otimista + rollback em caso de falha
+- [x] Soma de valores no cabeçalho de cada coluna
+- [x] Dialog de criar/editar negócio (título, valor, lead, responsável, prazo, etapa)
+- [x] Acessibilidade do DnD: mover card por teclado
+- [x] Scroll horizontal em telas estreitas
 
 **Verificar:** arrastar entre todas as etapas, inclusive Ganho e Perdido; totais atualizam.
 **Commit final:** `feat: pipeline kanban com drag-and-drop e cards de negócio`
@@ -148,14 +148,14 @@ reais e sem login).
 **Branch:** `feat/dashboard-ui`
 **Objetivo:** fechar a superfície de UI — métricas, configurações e billing.
 
-- [ ] Quatro cards: total de leads, negócios abertos, valor total do pipeline, taxa de conversão
-- [ ] Gráfico de funil em Recharts, usando as cores de etapa
-- [ ] Lista "meus negócios com prazo próximo"
-- [ ] `settings/workspace`: nome do workspace, renomear, excluir
-- [ ] `settings/members`: tabela de membros, papel, convidar por e-mail, remover
-- [ ] `settings/billing`: plano atual, uso vs. limites, CTA de upgrade
-- [ ] Onboarding: tela de criação do primeiro workspace + checklist inicial
-- [ ] Páginas de erro e `not-found`
+- [x] Quatro cards: total de leads, negócios abertos, valor total do pipeline, taxa de conversão
+- [x] Gráfico de funil em Recharts, usando as cores de etapa
+- [x] Lista "meus negócios com prazo próximo"
+- [x] `settings/workspace`: nome do workspace, renomear, excluir
+- [x] `settings/members`: tabela de membros, papel, convidar por e-mail, remover
+- [x] `settings/billing`: plano atual, uso vs. limites, CTA de upgrade
+- [x] Onboarding: tela de criação do primeiro workspace + checklist inicial
+- [x] Páginas de erro e `not-found`
 
 **Verificar:** todas as rotas do CLAUDE.md navegáveis com conteúdo real de UI.
 **Commit final:** `feat: dashboard de métricas, settings e onboarding`
