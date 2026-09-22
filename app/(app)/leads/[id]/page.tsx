@@ -13,8 +13,8 @@ import { UserAvatar } from "@/components/shared/user-avatar";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatDate } from "@/lib/format";
-import { getLead } from "@/lib/mock/leads";
-import { listMembers } from "@/lib/mock/workspace";
+import { getLead } from "@/lib/data/leads";
+import { listMembers } from "@/lib/data/members";
 
 interface PageProps {
   params: { id: string };

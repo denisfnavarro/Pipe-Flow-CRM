@@ -6,8 +6,8 @@ import { LeadsTable } from "@/components/leads/leads-table";
 import { EmptyState } from "@/components/shared/empty-state";
 import { PageHeader } from "@/components/shared/page-header";
 import { Button } from "@/components/ui/button";
-import { listLeads } from "@/lib/mock/leads";
-import { listMembers } from "@/lib/mock/workspace";
+import { listLeads } from "@/lib/data/leads";
+import { listMembers } from "@/lib/data/members";
 import { firstString, oneOf } from "@/lib/search-params";
 import { LEAD_STATUSES, type LeadFilters, type LeadSortField } from "@/types/domain";
 

@@ -3,12 +3,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { getWorkspace } from "@/lib/mock/workspace";
+import { requireWorkspace } from "@/lib/auth";
 
 export const metadata: Metadata = { title: "Workspace" };
 
 export default async function WorkspaceSettingsPage() {
-  const workspace = await getWorkspace();
+  const { workspace } = await requireWorkspace();
 
   return (
     <div className="space-y-5">

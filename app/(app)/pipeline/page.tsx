@@ -4,8 +4,8 @@ import { PipelineBoard } from "@/components/pipeline/pipeline-board";
 import { Money } from "@/components/shared/money";
 import { PageHeader } from "@/components/shared/page-header";
 import { listDeals } from "@/lib/mock/deals";
-import { listLeads } from "@/lib/mock/leads";
-import { listMembers } from "@/lib/mock/workspace";
+import { listLeads } from "@/lib/data/leads";
+import { listMembers } from "@/lib/data/members";
 import { OPEN_STAGES } from "@/types/domain";
 
 export const metadata: Metadata = { title: "Pipeline" };

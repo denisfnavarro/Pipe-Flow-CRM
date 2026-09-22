@@ -29,12 +29,21 @@ export type LeadStatus = (typeof LEAD_STATUSES)[number];
 export type MemberRole = "admin" | "member";
 export type Plan = "free" | "pro";
 
-export interface Member {
+/**
+ * Referência a uma pessoa, o suficiente para renderizar avatar e nome.
+ *
+ * As listagens trazem isso do `profiles`; papel e data de entrada só existem no
+ * contexto de um workspace, então ficam em `Member`.
+ */
+export interface UserRef {
   id: string;
   name: string;
   email: string;
-  role: MemberRole;
   avatarUrl: string | null;
+}
+
+export interface Member extends UserRef {
+  role: MemberRole;
   joinedAt: string;
 }
 
@@ -85,18 +94,18 @@ export interface Activity {
 
 /** Lead com as relações que a listagem e o Kanban precisam para renderizar. */
 export interface LeadWithRelations extends Lead {
-  owner: Member;
+  owner: UserRef;
   dealCount: number;
   lastActivityAt: string | null;
 }
 
 export interface DealWithRelations extends Deal {
-  owner: Member;
+  owner: UserRef;
   lead: Pick<Lead, "id" | "name" | "company"> | null;
 }
 
 export interface ActivityWithAuthor extends Activity {
-  author: Member;
+  author: UserRef;
 }
 
 export interface LeadDetail extends LeadWithRelations {

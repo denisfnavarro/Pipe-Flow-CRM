@@ -4,8 +4,9 @@ import { UsageMeter } from "@/components/settings/usage-meter";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { formatMoney } from "@/lib/format";
-import { countLeads } from "@/lib/mock/leads";
-import { getWorkspace, listMembers } from "@/lib/mock/workspace";
+import { countLeads } from "@/lib/data/leads";
+import { requireWorkspace } from "@/lib/auth";
+import { listMembers } from "@/lib/data/members";
 import { PLAN_LIMITS } from "@/lib/plans";
 
 export const metadata: Metadata = { title: "Plano e cobrança" };
@@ -19,8 +20,8 @@ const PRO_FEATURES = [
 ];
 
 export default async function BillingSettingsPage() {
-  const [workspace, members, leadCount] = await Promise.all([
-    getWorkspace(),
+  const [{ workspace }, members, leadCount] = await Promise.all([
+    requireWorkspace(),
     listMembers(),
     countLeads(),
   ]);

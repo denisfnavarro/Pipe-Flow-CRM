@@ -1,8 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createActivity } from "@/lib/mock/activities";
-import { createLead, deleteLead, updateLead } from "@/lib/mock/leads";
+import { createActivity } from "@/lib/data/activities";
+import { createLead, deleteLead, updateLead } from "@/lib/data/leads";
 import { activitySchema } from "@/lib/validations/activity";
 import { leadSchema } from "@/lib/validations/lead";
 

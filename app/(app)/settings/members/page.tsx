@@ -14,7 +14,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate } from "@/lib/format";
-import { getWorkspace, listMembers } from "@/lib/mock/workspace";
+import { requireWorkspace } from "@/lib/auth";
+import { listMembers } from "@/lib/data/members";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = { title: "Membros" };
@@ -22,7 +23,7 @@ export const metadata: Metadata = { title: "Membros" };
 const ROLE_LABELS = { admin: "Admin", member: "Membro" } as const;
 
 export default async function MembersSettingsPage() {
-  const [members, workspace] = await Promise.all([listMembers(), getWorkspace()]);
+  const [members, { workspace }] = await Promise.all([listMembers(), requireWorkspace()]);
 
   const seats = workspace.plan === "free" ? 2 : Infinity;
   const overLimit = members.length > seats;
