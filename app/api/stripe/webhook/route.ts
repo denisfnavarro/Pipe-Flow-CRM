@@ -97,13 +97,22 @@ async function workspaceIdFor(subscription: Stripe.Subscription): Promise<string
   return data?.workspace_id ?? null;
 }
 
-function periodEnd(subscription: Stripe.Subscription): string | null {
-  const seconds = subscription.items.data[0]?.current_period_end;
-  return seconds ? new Date(seconds * 1000).toISOString() : null;
-}
+/**
+ * Extrai o período da assinatura tolerando as duas formas da API da Stripe.
+ *
+ * O endpoint de webhook é criado com a versão de API padrão da conta, que pode
+ * ser mais antiga que a versão fixada no SDK. Até 2024 `current_period_start` e
+ * `current_period_end` viviam na assinatura; depois passaram para cada item.
+ * Ler só de um dos lugares grava `null` silenciosamente e a tela de cobrança
+ * deixa de mostrar a data de renovação.
+ */
+function period(subscription: Stripe.Subscription, edge: "start" | "end"): string | null {
+  const fromItem = subscription.items?.data?.[0]?.[`current_period_${edge}`];
+  const legacy = (subscription as unknown as Record<string, number | undefined>)[
+    `current_period_${edge}`
+  ];
 
-function periodStart(subscription: Stripe.Subscription): string | null {
-  const seconds = subscription.items.data[0]?.current_period_start;
+  const seconds = fromItem ?? legacy;
   return seconds ? new Date(seconds * 1000).toISOString() : null;
 }
 
@@ -121,8 +130,8 @@ async function syncSubscription(subscription: Stripe.Subscription): Promise<void
       stripe_customer_id: customerId,
       stripe_subscription_id: subscription.id,
       status: subscription.status,
-      current_period_start: periodStart(subscription),
-      current_period_end: periodEnd(subscription),
+      current_period_start: period(subscription, "start"),
+      current_period_end: period(subscription, "end"),
       cancel_at_period_end: subscription.cancel_at_period_end,
     },
     { onConflict: "workspace_id" },
