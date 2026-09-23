@@ -3,6 +3,8 @@
 CRM SaaS multi-empresa para PMEs, freelancers e times de vendas: pipeline Kanban, gestão de
 leads, timeline de atividades e planos de assinatura.
 
+**No ar:** <https://pipe-flow-crm-jet.vercel.app>
+
 - **O quê:** [docs/PRD.md](docs/PRD.md)
 - **Como:** [CLAUDE.md](CLAUDE.md)
 - **Em que ordem:** [docs/ROADMAP.md](docs/ROADMAP.md)

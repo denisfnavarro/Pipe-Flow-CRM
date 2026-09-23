@@ -291,18 +291,19 @@ volta para Free.
 **Branch:** `chore/deploy`
 **Objetivo:** aplicação no ar, monitorada e com domínio configurado.
 
-- [ ] Projeto na Vercel ligado ao GitHub; preview deploy por PR
-- [ ] Env vars de produção na Vercel e no Supabase (URLs de redirect do Auth)
-- [ ] Migrations aplicadas no Supabase de produção
-- [ ] Endpoint do webhook Stripe apontado para produção, em modo live
-- [ ] Domínio de envio verificado no Resend (SPF/DKIM)
-- [ ] Domínio customizado + HTTPS
-- [ ] Analytics e monitoramento de erro (Vercel Analytics + Sentry)
-- [ ] Smoke test em produção: signup → workspace → lead → deal → upgrade
-- [ ] `README.md` com setup local e variáveis de ambiente
+- [x] Projeto na Vercel ligado ao GitHub; preview deploy por PR
+- [x] Env vars de produção na Vercel e no Supabase (URLs de redirect do Auth)
+- [x] Migrations aplicadas no Supabase de produção
+- [x] Endpoint do webhook Stripe apontado para produção _(modo teste; live não configurado)_
+- [x] Domínio de envio verificado no Resend (SPF/DKIM)
+- [ ] Domínio customizado — não configurado (HTTPS ativo no domínio da Vercel)
+- [x] Analytics e monitoramento de erro _(Vercel Analytics ativo; Sentry instrumentado, aguardando DSN)_
+- [x] Smoke test em produção: signup → workspace → lead → deal → upgrade
+- [x] `README.md` com setup local e variáveis de ambiente
 
-**Verificar:** o fluxo completo funcionando no domínio público, com e-mail de convite
-chegando e checkout real em modo teste.
+**Verificado em 23/09/2026:** rotas, papéis, isolamento entre workspaces e o ciclo completo
+de assinatura pelo webhook de produção. O cadastro com e-mail real e o aceite de convite em
+duas caixas dependem de verificação manual — ver [DEPLOY.md](DEPLOY.md).
 **Commit final:** `chore: deploy de produção na vercel com supabase e stripe`
 
 ---
